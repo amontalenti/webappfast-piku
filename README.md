@@ -43,11 +43,12 @@ You'll know piku is setup because you should now be able to ssh in with the
     Commands:
     apps              List apps, e.g.: piku apps
     ...
-    update            Update the piku cli
     Connection to x.x.x.x closed.
 
-Then, as a helper, you can install the piku CLI locally on your machine. Do
-this with a simple download from GitHub:
+Then, as a helper, you can install the piku CLI locally on your machine.
+Here, I installed it in `~/opt/bin`, which is my own little directory for
+scripts, but you might find it convenient to put it in `/usr/local/bin` on
+many UNIX machines. Do this with a simple download from GitHub:
 
     $ cd ~/opt/bin
     $ wget https://raw.githubusercontent.com/piku/piku/master/piku
