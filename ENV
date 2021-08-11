@@ -1,0 +1,8 @@
+# this is the address of my ZeroTier bridge, so it is secure access
+BIND_ADDRESS=192.168.191.43
+
+# this is the /etc/hosts entry I use locally to access ZeroTier bridge
+NGINX_SERVER_NAME=zero.black
+
+# this ensures we only access it over HTTPS, to reduce confusion
+NGINX_HTTPS_ONLY=true
