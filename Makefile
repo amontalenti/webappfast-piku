@@ -18,3 +18,6 @@ logs:
 
 shell:
 	piku -t run bash
+
+show:
+	piku run -- tree /home/piku/.piku -L 2
