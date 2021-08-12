@@ -1,5 +1,5 @@
 help:
-	@echo "Try: dummycommit, quickcommit, deploy, logs, shell"
+	@echo "Try: dummycommit, quickcommit, pushboth, deploy, logs, shell, show"
 
 dummycommit:
 	@echo "Dummy commit"

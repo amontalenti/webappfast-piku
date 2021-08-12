@@ -303,5 +303,34 @@ frameworks beyond stock Python 3 and the UNIX shell.
 
 [git-pack-protocol]: https://github.com/git/git/blob/master/Documentation/technical/pack-protocol.txt
 [procfile]: https://github.com/piku/piku/blob/master/docs/DESIGN.md#procfile-format
-
 [cron]: https://uwsgi-docs.readthedocs.io/en/latest/Cron.html
+
+### Where are the containers? Where is the orchestrator?
+
+Bwahahahaha. There are no containers here, my friend. There are no orchestrators.
+
+Sweet, sweet UNIX is all you need, you see!
+
+Though containers can be quite nice to create a binary deploy artifact, of
+sorts, out of your entire environment, it's worth mentioning _how much simpler_
+this is than running your app under a container. Here, your app is nothing more
+than a directory of source code, done from a clean `git checkout` from a `git`
+branch. Your "environment" is defined using Python venvs, which provide much
+of the same benefit of containers, but at a fraction of the cognitive and machine
+cost. They are much lighter weight and easier to reason about, and they don't
+introduce any new networking, disk, or filesystem abstractions. Finally, though
+you might think about some sort of "orchestrator" for your "containers", here
+we have a "process manager" (uwsgi) for your "processes". The subprocesses
+are managed the UNIX way, and thus are introspectable in all the usual ways.
+The communication with other tools (like nginx) is happening via plain sockets.
+The logging is happening via plain files. Everything is where it should be.
+
+As for rollbacks and state, it's true that this whole setup isn't saying much
+about your database (e.g. Postgres, Redis, Elasticsearch), nor about your
+outside-of-the-source-tree production state. But, let's be honest: containers
+never really helped you with these issues in production, either. They were
+usually, if not always, managed separately. So, arguably, piku is focusing
+on the part of your deployment that can actually be managed for you in a
+set-it-and-forget-it way. To get your databases working and managed well,
+and supporting complex data migration and administration operations, you'll
+need to rely on the usual suspects: ansible, terraform, fabric.
