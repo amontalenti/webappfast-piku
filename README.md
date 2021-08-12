@@ -8,7 +8,10 @@ The assumption here is that you have a development environment as follows:
 - a network-available homelab server, VPS, or cloud node with `root` access
 - a local Python environment, e.g. managed with `pyenv` and/or `pipx`
 
-Given this environment, WIIFM? That is, "What's In It For Me?"
+Given this environment, let's say I want to use [piku][piku]. WIIFM? That is,
+"What's In It For Me?"
+
+[piku]: https://github.com/piku/piku#readme
 
 The goal here is to have Heroku-style deploys, with none of the Heroku (or
 dokku) style cognitive overhead. What is a Heroku-style deploy?
