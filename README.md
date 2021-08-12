@@ -125,8 +125,9 @@ Fascinating!
 
 It seems very magical that when you do a `git push` using a remote described
 simply as `piku@machine:webappfast` that git will "just know" to make a git
-repo for you in the special directory `.piku/repos/webappfast` on the remote
-server, and treat that git repo as the remote. What the heck is going on here?
+repo for you in the special directory `/home/piku/.piku/repos/webappfast` on
+the remote server, and treat that git repo as the remote. What the heck is
+going on here?
 
 Well, when combined with the above trick, the `piku.py` command-line tool
 implements support for something known as the "git pack protocol", simply
@@ -159,8 +160,8 @@ The code that implements this does a couple of things:
 - shells out to `git-receive-pack` (with our new CWD) to actually receive the
   git data
 
-Pretty amazingly fancy. By this trick, you push to `piku@machine:app` and
-you get a managed git repo under `piku@machine:.piku/repos/app`, with
+Pretty amazingly fancy. By this trick, you push to `piku@machine:app` and you
+get a managed git repo under `piku@machine:/home/piku/.piku/repos/app`, with
 post-commit hooks already configured.
 
 ### What does the post-commit hook do?
@@ -172,16 +173,17 @@ course, all the rest of that is implemented in `piku.py` as well.
 When you push code to the piku remote, the post-commit-hook runs. This hook
 does a few things:
 
-- checks out the pushed commit of code into .piku/apps/APP
+- checks out the pushed commit of code into `/home/piku/.piku/apps/APP`
 - scans the source code to determine the "runtime", e.g. when it has
   `requirements.txt`, it's a Python runtime
-- creates an "env" for the app in .piku/envs/APP; for Python, this uses `venv`
+- creates an "env" for the app in `/home/piku/.piku/envs/APP`; for Python, this
+  uses `venv`
 - installs dependencies (for Python, this is via requirements.txt and `pip`)
 - scans the `ENV` file to set environmental variables, 12-factor style
 - scans the `Procfile` file to determine which apps should be mounted, and how
 - as necessary, configures uwsgi (process manager), acme (certificate manager),
   and nginx (web server) from there
-- points the logs into .piku/logs/APP
+- points the logs into `/home/piku/.piku/logs/APP`
 
 What's great is that all of this can happen immediately upon `git push`, since
 we're already "ssh'ed in" to the remote machine. There is no need for a fab or

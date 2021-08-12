@@ -9,6 +9,9 @@ quickcommit:
 	@echo "Quick commit"
 	git commit -a -m 'quick commit'
 
+pushboth:
+	git push && git push origin
+
 deploy:
 	@echo "Deploy"
 	git push && piku stop && piku deploy
