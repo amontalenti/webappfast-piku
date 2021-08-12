@@ -320,10 +320,12 @@ of the same benefit of containers, but at a fraction of the cognitive and machin
 cost. They are much lighter weight and easier to reason about, and they don't
 introduce any new networking, disk, or filesystem abstractions. Finally, though
 you might think about some sort of "orchestrator" for your "containers", here
-we have a "process manager" (uwsgi) for your "processes". The subprocesses
-are managed the UNIX way, and thus are introspectable in all the usual ways.
-The communication with other tools (like nginx) is happening via plain sockets.
-The logging is happening via plain files. Everything is where it should be.
+we have a "process manager" (uwsgi) for your "processes" (python).
+
+The subprocesses are managed the UNIX way, and thus are introspectable in all
+the usual ways. The communication with other tools (like nginx) is happening
+via plain sockets. The logging is happening via plain text files. Everything is
+where it should be.
 
 As for rollbacks and state, it's true that this whole setup isn't saying much
 about your database (e.g. Postgres, Redis, Elasticsearch), nor about your
