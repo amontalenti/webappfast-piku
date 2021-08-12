@@ -70,7 +70,7 @@ a git-based workflow "semi-locally" (with 2 copies, your machine and the piku
 remote), and then do squashing and even (gasp!) force-pushes as necessary
 to clean up history before pushing to GitHub (origin).
 
-## What is this magic? 🪄
+## What is this magic?
 
 Once piku is set up, it wires together some technologies and UNIX hacks
 quite elegantly. I'll walk through them in turn.
