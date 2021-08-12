@@ -8,9 +8,32 @@ The assumption here is that you have a development environment as follows:
 - a network-available homelab server, VPS, or cloud node with `root` access
 - a local Python environment, e.g. managed with `pyenv` and/or `pipx`
 
-First, you need to bootstrap your remote machine, whether it's homelab, VPS, or
-cloud. We'll refer to that machine as `machine` from here on out. Make sure you
-can `ssh` in, both as yourself, and as `root`:
+Given this environment, WIIFM? That is, "What's In It For Me?"
+
+The goal here is to have Heroku-style deploys, with none of the Heroku (or
+dokku) style cognitive overhead. What is a Heroku-style deploy?
+
+- You write code in a local git repo.
+- You push to a "special" branch (in this case, called "piku") to deploy your
+  code to a remote alpha/beta/staging environment, where your webapp is
+automatically mounted and running.
+- You can control aspects of that environment in a way that'll be easy to
+  mirror in production, using source artifacts that are simple files like `ENV`
+(for env variables) and `Procfile` (for defining your app's entrypoints).
+- You can perform basic admin operations on your Heroku-like environment, such
+  as viewing logs, destroying apps, restarting apps, and scaling apps (from 1
+to N processes).
+
+To get to this amazing end state, you'll need to start by bootstrapping a
+remote machine with the `piku` infrastructure.
+
+This remote machine can be a locally-available homelab, live in a VPS, or live
+in the cloud. As a preliminary step, you might want to use a tool like ZeroTier
+to establish a secure network link with that remote node (in lieu of a VPN or
+reverse tunneling via SSH).
+
+We'll refer to that machine as `machine` from here on out. Make sure you can
+`ssh` in, both as yourself, and as `root`:
 
     $ ssh machine
     $ ssh root@machine
