@@ -319,7 +319,7 @@ here is what you should know, in a nutshell:
 logging, and multi-worker spawning with built-in functionality similar to the
 `supervisord` tool that is often used alongside it
 - use `cron` for repeated web apps; believe it or not, this _also_ gets managed
-  by uwgi, since uwsgi has [cron-style tasks][cron]
+  by uwsgi, since uwsgi has [cron-style tasks][cron]
 
 This therefore explains the cleverness of piku: it outsources most of the
 "service management" functionality to `uwsgi`, and then outsources "edge HTTP"
