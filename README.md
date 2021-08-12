@@ -87,17 +87,17 @@ local `piku` CLI you installed above, to basically run "remote" commands
 on your box, following the Heroku API pretty closely.
 
 For those keeping score, this trick, alone, along with a simple shell wrapper,
-pretty much implements the entire concept of Python's `fab` (Fabric,
-`fab-classic`) tool, but with the Python layer moved to _the other side of
-the SSH connection_. This is sort of brilliant and mind-boggling. But, rather
-than having to implement the SSH protocol, via paramiko and similar, inside
-the fabric Python library, with this trick, we implement a "plain" CLI which
-gets "bootstrapped" onto the remote node, and then we execute the CLI over
-a _plain SSH connection_, thus leveraging the standard `ssh` client for all
-the `client->server` communication. This means the CLI is "just" a standard
-Python CLI tool, one that is expected to be run "over" an ssh connection.
+pretty much implements the entire concept of Python's `fab` (aka `Fabric` or
+`fab-classic`) tool, but with the Python layer moved to _the other side of the
+SSH connection_. This is sort of brilliant and mind-boggling. But, rather than
+having to re-implement the SSH protocol, via `paramiko` and similar, inside the
+fabric Python library, with this trick, we implement a "plain" CLI which gets
+"bootstrapped" onto the remote node, and then we execute the CLI over a _plain
+SSH connection_, thus leveraging the standard `ssh` client for all the
+`client->server` communication.
 
-Awesome!
+This means the CLI is "just" a standard Python CLI tool, one that is expected
+to be run "over" an ssh connection. Awesome!
 
 Here is how that looks in the `.authorized_keys` file:
 
@@ -153,11 +153,11 @@ is our "piku app name", gets sent as an extra parameter here, so it's really:
 
 The code that implements this does a couple of things:
 
-    - creates a repo if necessary in /home/piku/.piku/repos/APP
-    - initializes the repo, if necessary
-    - makes a post-commit hook in the repo config; this will matter later
-    - shells out to `git-receive-pack` (with our new CWD) to actually receive
-      the git data
+- creates a repo if necessary in /home/piku/.piku/repos/APP
+- initializes the repo, if necessary
+- makes a post-commit hook in the repo config; this will matter later
+- shells out to `git-receive-pack` (with our new CWD) to actually receive the
+  git data
 
 Pretty amazingly fancy. By this trick, you push to `piku@machine:app` and
 you get a managed git repo under `piku@machine:.piku/repos/app`, with
@@ -172,19 +172,16 @@ course, all the rest of that is implemented in `piku.py` as well.
 When you push code to the piku remote, the post-commit-hook runs. This hook
 does a few things:
 
-    - checks out the pushed commit of code into .piku/apps/APP
-    - scans the source code to determine the "runtime", e.g. when it has
-      `requirements.txt`, it's a Python runtime
-    - creates an "env" for the app in .piku/envs/APP; for Python, this uses
-      `venv`
-    - installs dependencies (for Python, this is via requirements.txt and
-      `pip`)
-    - scans the `ENV` file to set environmental variables, 12-factor style
-    - scans the `Procfile` file to determine which apps should be mounted, and
-      how
-    - as necessary, configures uwsgi (process manager), acme (certificate
-      manager), and nginx (web server) from there
-    - points the logs into .piku/logs/APP
+- checks out the pushed commit of code into .piku/apps/APP
+- scans the source code to determine the "runtime", e.g. when it has
+  `requirements.txt`, it's a Python runtime
+- creates an "env" for the app in .piku/envs/APP; for Python, this uses `venv`
+- installs dependencies (for Python, this is via requirements.txt and `pip`)
+- scans the `ENV` file to set environmental variables, 12-factor style
+- scans the `Procfile` file to determine which apps should be mounted, and how
+- as necessary, configures uwsgi (process manager), acme (certificate manager),
+  and nginx (web server) from there
+- points the logs into .piku/logs/APP
 
 What's great is that all of this can happen immediately upon `git push`, since
 we're already "ssh'ed in" to the remote machine. There is no need for a fab or
