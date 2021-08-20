@@ -6,11 +6,11 @@ app = Flask(__name__)
 def hello_world():
     return "<p>Hello, World!</p>"
 
-@app.route("/test")
+@app.route("/test1")
 def hello_test1():
     return "<p>Hello, test1!</p>"
 
-@app.route("/test")
+@app.route("/test2")
 def hello_test2():
     return "<p>Hello, test4!</p>"
 
