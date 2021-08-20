@@ -12,7 +12,7 @@ def hello_test1():
 
 @app.route("/test2")
 def hello_test2():
-    return "<p>Hello, test4!</p>"
+    return "<p>Hello, test2!</p>"
 
 # example docs
 if __name__ == "__main__":
