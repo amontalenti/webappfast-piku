@@ -5,4 +5,7 @@ BIND_ADDRESS=192.168.191.43
 NGINX_SERVER_NAME=zero.black
 
 # this ensures we only access it over HTTPS, to reduce confusion
-NGINX_HTTPS_ONLY=true
+NGINX_HTTPS_ONLY=1
+
+# enable auto restart on deploy
+AUTO_RESTART=1
