@@ -1,5 +1,5 @@
 help:
-	@echo "Try: dummycommit, quickcommit, pushboth, deploy, logs, shell, show"
+	@echo "Try: dummycommit, quickcommit, pushboth, deploy, logs, shell, show, hard-restart"
 
 dummycommit:
 	@echo "Dummy commit"
@@ -24,3 +24,12 @@ shell:
 
 show:
 	piku run -- tree /home/piku/.piku -L 2
+
+uwsgi-restart:
+	piku run -- sudo /etc/init.d/uwsgi-piku restart
+
+nginx-restart:
+	piku run -- sudo /etc/init.d/nginx restart
+
+hard-restart: nginx-restart uwsgi-restart
+	piku restart
