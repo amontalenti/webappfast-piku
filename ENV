@@ -1,9 +1,9 @@
 # this is the address of my ZeroTier bridge, so it is secure access
-NGINX_IPV4_ADDRESS=192.168.191.43
-NGINX_IPV6_ADDRESS=fcae:f2f1:1880:4392:d05a:0000:0000:0001
+NGINX_IPV4_ADDRESS="192.168.191.43"
+NGINX_IPV6_ADDRESS="fcae:f2f1:1880:4392:d05a:0000:0000:0001"
 
 # this is the /etc/hosts entry I use locally to access ZeroTier bridge
-NGINX_SERVER_NAME=black.amontalenti.com
+NGINX_SERVER_NAME="black.amontalenti.com"
 
 # this ensures we only access it over HTTPS, to reduce confusion
 NGINX_HTTPS_ONLY=1
