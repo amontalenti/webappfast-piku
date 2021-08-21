@@ -2,7 +2,7 @@
 BIND_ADDRESS=192.168.191.43
 
 # this is the /etc/hosts entry I use locally to access ZeroTier bridge
-NGINX_SERVER_NAME=zero.black
+NGINX_SERVER_NAME=black.amontalenti.com
 
 # this ensures we only access it over HTTPS, to reduce confusion
 NGINX_HTTPS_ONLY=1
